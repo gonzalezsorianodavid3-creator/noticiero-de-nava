@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#365963">
+  <meta name="description" content="El Noticiero de Nava. Actualidad de Nava, la Comarca de la Sidra y Asturias.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icon-192.png">
+  <title>El Noticiero de Nava</title>
+  <style>
+    :root{--ink:#365963;--paper:#fff;--bg:#f3f6f5;--muted:#66777b;--line:#dce5e2}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:#17272b;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    header{background:white;border-bottom:1px solid var(--line);padding:16px 18px 12px;text-align:center}
+    header img{width:min(190px,54vw);height:auto;display:block;margin:0 auto 8px}
+    header p{margin:0;color:var(--ink);font-size:13px;letter-spacing:.2px}
+    nav{display:flex;gap:8px;overflow:auto;padding:12px 14px;background:white;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:2}
+    nav button{border:1px solid var(--line);border-radius:999px;background:white;color:var(--ink);padding:9px 13px;white-space:nowrap;font-size:14px}
+    nav button.active{background:var(--ink);color:white;border-color:var(--ink)}
+    main{max-width:760px;margin:0 auto;padding:18px 14px 92px}
+    .intro{margin:2px 2px 16px}.intro h1{font-size:24px;line-height:1.15;margin:0 0 6px;color:var(--ink)}.intro p{margin:0;color:var(--muted);font-size:14px}
+    .notice{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:12px 0}
+    .notice h2{font-size:18px;margin:0 0 8px;color:var(--ink)}.notice p{font-size:14px;line-height:1.5;margin:0 0 12px;color:#35474b}
+    .notice .tag{font-size:11px;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-bottom:8px}
+    .notice a{color:var(--ink);font-weight:650;text-decoration:none}
+    .note{font-size:12px;color:var(--muted);line-height:1.5;margin:18px 3px}
+    .actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px}
+    .actions a,.actions button{border:0;border-radius:10px;padding:11px 14px;background:var(--ink);color:white;text-decoration:none;font-size:14px}
+    .actions .secondary{background:#e5eeeb;color:var(--ink)}
+    footer{position:fixed;bottom:0;left:0;right:0;background:white;border-top:1px solid var(--line);padding:10px 14px calc(10px + env(safe-area-inset-bottom));text-align:center;font-size:12px;color:var(--muted)}
+    @media(min-width:600px){header img{width:150px}main{padding-top:26px}.notice{padding:22px}}
+  </style>
+</head>
+<body>
+<header>
+  <img src="assets/logo-noticiero.jpg" alt="Logotipo de El Noticiero de Nava">
+  <p>Nava · Comarca de la Sidra · Asturias</p>
+</header>
+<nav aria-label="Secciones">
+  <button class="active" data-section="Inicio">Inicio</button>
+  <button data-section="Nava">Nava</button>
+  <button data-section="Comarca de la Sidra">Comarca</button>
+  <button data-section="Asturias">Asturias</button>
+  <button data-section="Historia">Historia</button>
+  <button data-section="Recetas">Recetas</button>
+</nav>
+<main>
+  <section class="intro">
+    <h1 id="section-title">Actualidad cercana</h1>
+    <p id="section-subtitle">La información de nuestro entorno, contada con voz propia.</p>
+  </section>
+  <article class="notice">
+    <div class="tag">Bienvenidos</div>
+    <h2>El Noticiero de Nava estrena su espacio propio</h2>
+    <p>Esta es la primera versión de la aplicación. Aquí iremos incorporando las noticias y los contenidos publicados por El Noticiero de Nava.</p>
+    <p>Por ahora, las noticias no se importan automáticamente desde Facebook. Este espacio está preparado para incorporar contenidos verificados a medida que avancemos con la publicación.</p>
+    <div class="actions">
+      <a href="https://www.facebook.com/" target="_blank" rel="noopener">Visitar Facebook</a>
+      <button class="secondary" id="share">Compartir aplicación</button>
+    </div>
+  </article>
+  <article class="notice">
+    <div class="tag">Próximamente</div>
+    <h2>Noticias de Nava, la Comarca y Asturias</h2>
+    <p>La portada está organizada para dar prioridad a Nava, continuar por la Comarca de la Sidra y recoger también la actualidad del resto de Asturias.</p>
+  </article>
+  <p class="note">Versión inicial de demostración. La dirección pública, los enlaces definitivos y la actualización de noticias se configurarán al publicar la aplicación.</p>
+</main>
+<footer>EL NOTICIERO DE NAVA · Información cercana</footer>
+<script>
+  const descriptions = {
+    "Inicio":["Actualidad cercana","La información de nuestro entorno, contada con voz propia."],
+    "Nava":["Noticias de Nava","La actualidad de nuestro concejo."],
+    "Comarca de la Sidra":["Comarca de la Sidra","Información de los concejos de nuestra comarca."],
+    "Asturias":["Asturias","Noticias del resto de Asturias."],
+    "Historia":["Historia y curiosidades","Historias para conocer mejor nuestro entorno."],
+    "Recetas":["Receta del día","Ideas de cocina para compartir."]
+  };
+  document.querySelectorAll("nav button").forEach(btn => btn.addEventListener("click", () => {
+    document.querySelectorAll("nav button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    const [title, subtitle] = descriptions[btn.dataset.section];
+    document.getElementById("section-title").textContent = title;
+    document.getElementById("section-subtitle").textContent = subtitle;
+  }));
+  document.getElementById("share").addEventListener("click", async () => {
+    if (navigator.share) {
+      try { await navigator.share({title:"El Noticiero de Nava", text:"Sigue la actualidad de Nava, la Comarca de la Sidra y Asturias.", url:location.href}); } catch(e) {}
+    } else {
+      alert("Cuando la aplicación tenga una dirección pública, podrás compartir ese enlace desde el botón de compartir del navegador.");
+    }
+  });
+  if ("serviceWorker" in navigator && location.protocol.startsWith("http")) {
+    window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+  }
+</script>
+</body>
+</html>
