@@ -155,5 +155,32 @@
     Guardar publicación
   </button>
 </section>
-</body>
+<script>
+function guardarNoticia() {
+  const titulo = document.getElementById("titulo").value.trim();
+  const seccion = document.getElementById("seccion").value;
+  const contenido = document.getElementById("contenido").value.trim();
+
+  if (!titulo || !contenido) {
+    alert("Escribe el título y el contenido de la publicación.");
+    return;
+  }
+
+  const noticia = {
+    titulo: titulo,
+    seccion: seccion,
+    contenido: contenido
+  };
+
+  const noticias = JSON.parse(localStorage.getItem("noticias") || "[]");
+  noticias.unshift(noticia);
+
+  localStorage.setItem("noticias", JSON.stringify(noticias));
+
+  alert("Publicación guardada en este navegador.");
+
+  document.getElementById("titulo").value = "";
+  document.getElementById("contenido").value = "";
+}
+</script> </body>
 </html>
