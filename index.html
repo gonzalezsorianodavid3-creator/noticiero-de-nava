@@ -131,5 +131,29 @@
     window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(()=>{}));
   }
 </script>
+  <section id="administracion" class="notice">
+  <h2>Publicar contenido</h2>
+
+  <label for="titulo">Título de la publicación</label>
+  <input id="titulo" type="text" placeholder="Escribe el título">
+
+  <label for="seccion">Sección</label>
+  <select id="seccion">
+    <option value="Nava">Nava</option>
+    <option value="Comarca">Comarca</option>
+    <option value="Asturias">Asturias</option>
+    <option value="Historia">Historia</option>
+    <option value="Recetas">Recetas</option>
+    <option value="Información diaria">Información diaria</option>
+  </select>
+
+  <label for="contenido">Texto de la publicación</label>
+  <textarea id="contenido" rows="8"
+    placeholder="Escribe aquí el contenido"></textarea>
+
+  <button type="button" onclick="guardarNoticia()">
+    Guardar publicación
+  </button>
+</section>
 </body>
 </html>
